@@ -15,8 +15,6 @@ export interface SiteContent {
     tagline: string;
     instagram: string;
     instagramUrl: string;
-    bioSite: string;
-    bioSiteUrl: string;
     whatsappUrl: string;
     whatsappPhone: string;
     reviewUrl: string;
@@ -30,7 +28,6 @@ export interface SiteContent {
     ctaLabel: string;
     locationPre: string;
     locationStrong: string;
-    seal: { title: string; text: string };
   };
   stats: { items: { value: string; label: string }[] };
   integralCare: { kicker: string; title: string; paragraphs: string[]; points: string[] };
@@ -51,6 +48,7 @@ export interface SiteContent {
     kicker: string;
     title: string;
     intro: string;
+    highlights: string[];
     groups: { title: string; intro: string; items: { name: string; text: string }[] }[];
   };
   process: { kicker: string; title: string; intro: string; steps: { title: string; text: string }[] };
@@ -83,8 +81,6 @@ export const content: SiteContent = {
     tagline: 'Sua médica, para todas as fases da sua vida.',
     instagram: '@dragabrieladornelass',
     instagramUrl: 'https://www.instagram.com/dragabrieladornelass/',
-    bioSite: 'bio.site/dragabrieladornelass',
-    bioSiteUrl: 'https://bio.site/dragabrieladornelass',
     whatsappUrl:
       'https://api.whatsapp.com/send/?phone=5561996925550&text&type=phone_number&app_absent=0',
     whatsappPhone: '5561996925550',
@@ -116,10 +112,6 @@ export const content: SiteContent = {
     ctaLabel: 'Agendar consulta',
     locationPre: 'Atendimento personalizado em ',
     locationStrong: 'Brasília/DF',
-    seal: {
-      title: 'Ginecologia Íntima com Excelência',
-      text: 'Ciência, tecnologia e acolhimento para cuidar da sua saúde íntima.',
-    },
   },
 
   stats: {
@@ -142,7 +134,7 @@ export const content: SiteContent = {
     points: [
       'Avaliação que conecta hormônios, metabolismo e saúde íntima',
       'Decisões compartilhadas, com informação clara e acolhimento',
-      'Abordagem moderna e segura, sempre individualizada',
+      'Abordagem moderna e cuidadosa, sempre individualizada',
     ],
   },
 
@@ -168,7 +160,7 @@ export const content: SiteContent = {
         key: 'emagrecimento',
         title: 'Emagrecimento',
         text:
-          'Abordagem do peso e do metabolismo conectada à saúde hormonal feminina. O objetivo é um emagrecimento sustentável e seguro, com acompanhamento médico que respeita o seu corpo e a sua rotina, sem fórmulas mágicas.',
+          'Abordagem do peso e do metabolismo conectada à saúde hormonal feminina. O objetivo é um emagrecimento sustentável, com acompanhamento médico que respeita o seu corpo e a sua rotina, sem fórmulas mágicas.',
       },
       {
         key: 'cirurgia',
@@ -224,6 +216,14 @@ export const content: SiteContent = {
     title: 'Recursos modernos a serviço da sua saúde',
     intro:
       'Tecnologia, ciência e técnica refinada reunidas em um cuidado discreto. Cada procedimento abaixo é indicado de forma criteriosa, conforme a sua necessidade clínica e após avaliação individualizada.',
+    highlights: [
+      'Cirurgia íntima',
+      'Protocolo de emagrecimento',
+      'Lipedema',
+      'Reposição hormonal',
+      'Laser íntimo de CO₂',
+      'Clareamento íntimo',
+    ],
     groups: [
       {
         title: 'Saúde hormonal & menopausa',
@@ -294,7 +294,7 @@ export const content: SiteContent = {
           {
             name: 'Lipedema',
             text:
-              'Atenção ao lipedema — acúmulo doloroso de gordura que afeta principalmente pernas e braços —, com avaliação cuidadosa e orientação de manejo voltada ao alívio dos sintomas e à qualidade de vida.',
+              'Atenção ao lipedema, condição que exige diagnóstico médico, com avaliação cuidadosa e orientação de manejo voltada ao conforto e à qualidade de vida.',
           },
           {
             name: 'Impacto do emagrecimento na saúde íntima',
@@ -320,7 +320,7 @@ export const content: SiteContent = {
           {
             name: 'Clareamento íntimo',
             text:
-              'Procedimento estético para uniformizar o tom da região íntima, indicado após avaliação individualizada e realizado com técnica segura e discreta.',
+              'Procedimento estético para uniformizar o tom da região íntima, indicado após avaliação individualizada e realizado de forma criteriosa e discreta.',
           },
           {
             name: 'Saúde e hidratação íntima',
@@ -465,7 +465,7 @@ export const content: SiteContent = {
       {
         q: 'O acompanhamento de emagrecimento funciona para todo mundo?',
         a:
-          'Cada organismo responde de uma forma, e o emagrecimento depende de fatores hormonais, metabólicos e de estilo de vida. Por isso, não trabalhamos com promessas ou fórmulas prontas: o plano é personalizado, com acompanhamento médico voltado a um emagrecimento seguro e sustentável.',
+          'Cada organismo responde de uma forma, e o emagrecimento depende de fatores hormonais, metabólicos e de estilo de vida. Por isso, não trabalhamos com promessas ou fórmulas prontas: o plano é personalizado, com acompanhamento médico voltado a um emagrecimento responsável e sustentável.',
       },
       {
         q: 'O laser íntimo de CO2 é indicado para qualquer queixa?',

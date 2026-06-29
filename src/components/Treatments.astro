@@ -16,6 +16,14 @@ const groupImages = [imgHormonal, imgCirurgia, imgEmagrecimento, imgRegenerativa
       <span class="kicker kicker--center">{treatments.kicker}</span>
       <h2>{treatments.title}</h2>
       <p class="lead">{treatments.intro}</p>
+      <ul class="tchips" data-reveal data-reveal-delay="1">
+        {treatments.highlights.map((h) => (
+          <li class="tchip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.2 4.8L19 9l-3.6 3.4.9 5.1L12 15l-4.3 2.5.9-5.1L5 9l4.8-1.2Z"/></svg>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div class="treatments__groups">
@@ -67,6 +75,46 @@ const groupImages = [imgHormonal, imgCirurgia, imgEmagrecimento, imgRegenerativa
 <style>
   .treatments .section-head {
     margin-bottom: 64px;
+  }
+  .tchips {
+    list-style: none;
+    margin: 30px auto 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 760px;
+  }
+  .tchip {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(184, 135, 83, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--color-brown);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: var(--transition);
+  }
+  .tchip svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--color-gold);
+  }
+  .tchip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  @media (max-width: 600px) {
+    .tchip {
+      padding: 9px 14px;
+      font-size: 0.84rem;
+    }
   }
   .treatments__groups {
     display: flex;

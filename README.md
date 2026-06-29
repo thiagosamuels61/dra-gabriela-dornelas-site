@@ -32,15 +32,21 @@ src/
   scripts/      # motion.ts (Lenis + GSAP + acordeões + nav)
   icons/        # SVGs recriados (ícones de serviço + emblema)
   data/         # content.ts (toda a copy)
-  assets/       # hero-gabriela.webp, logo-gabriela.png
+  assets/       # hero-gabriela.webp, fotos reais da clínica, retrato e imagens de tratamento
 ```
 
-## Itens para personalizar antes do go-live
+## Dados reais já integrados
 
-- **WhatsApp/agendamento real:** `whatsappUrl` em `src/data/content.ts` (placeholder `https://wa.me/55`).
-- **Fotos reais:** blocos `PhotoFrame` marcados com `data-replace="foto"` (Sobre, Tratamentos, Clínica).
-- **Endereço/mapa:** seção de contato (placeholder — apenas "Brasília/DF").
-- **Depoimentos:** textos ilustrativos em `content.ts` (substituir por reais com consentimento).
+- **WhatsApp:** `+55 61 99692-5550` (`api.whatsapp.com`) em todos os CTAs.
+- **Instagram:** `@dragabrieladornelass`. **Doctoralia:** botão "Avaliar atendimento".
+- **Clínica:** Clínica Soul Essence — Asa Sul, Brasília/DF.
+- **Fotos:** fotos reais da clínica na seção "A clínica"; retrato real no "Sobre".
+
+## Itens para evoluir (opcional)
+
+- **Mapa real:** a seção de contato usa um bloco visual de localização; pode receber um mapa incorporado.
+- **Imagens de tratamento:** `src/assets/trat-*.webp` são ilustrativas — substituíveis por fotos próprias.
+- **TikTok / Facebook:** adicionar URLs reais para ligar esses ícones de rede.
 
 ---
 
