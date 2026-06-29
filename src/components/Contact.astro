@@ -1,0 +1,270 @@
+---
+import { content } from "../data/content.ts";
+const { contact, doctor } = content;
+
+const infoIcons: Record<string, string> = {
+  Cidade: '<path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  Instagram:
+    '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/>',
+  Agendamento:
+    '<rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M3.5 9h17M8 3v3M16 3v3M8 14h4"/>',
+};
+---
+
+<section id="contato" class="section section-soft contact">
+  <div class="container contact__grid">
+    <div class="contact__info" data-reveal="left">
+      <span class="kicker">{contact.kicker}</span>
+      <h2>{contact.title}</h2>
+      <p>{contact.text}</p>
+
+      <ul class="contact__list">
+        {contact.infos.map((info) => (
+          <li>
+            <span class="contact__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={infoIcons[info.label] ?? ""}></svg>
+            </span>
+            <span>
+              <span class="contact__label">{info.label}</span>
+              <span class="contact__value">{info.value}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="contact__social">
+        <a href={doctor.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <span>{doctor.instagram}</span>
+        </a>
+        <a href={doctor.bioSiteUrl} target="_blank" rel="noopener" aria-label="Bio site">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 6 .5l2-2a4 4 0 0 0-5.7-5.7l-1.1 1.1"/><path d="M14 10a4 4 0 0 0-6-.5l-2 2a4 4 0 0 0 5.7 5.7l1.1-1.1"/></svg>
+          <span>{doctor.bioSite}</span>
+        </a>
+      </div>
+
+      <div class="contact__map" data-replace="mapa" aria-label="Localização em Brasília/DF">
+        <span class="contact__map-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </span>
+        <span>Atendimento em <strong>{doctor.city}</strong></span>
+      </div>
+    </div>
+
+    <form class="contact__form card" data-contact-form data-reveal="right">
+      <h3 class="contact__form-title">Solicite o seu agendamento</h3>
+      <div class="field">
+        <label for="cf-name">Nome</label>
+        <input class="input" id="cf-name" name="name" type="text" placeholder="Seu nome completo" required />
+      </div>
+      <div class="field">
+        <label for="cf-phone">WhatsApp</label>
+        <input class="input" id="cf-phone" name="phone" type="tel" placeholder="(61) 90000-0000" />
+      </div>
+      <div class="field">
+        <label for="cf-subject">Assunto</label>
+        <select class="select" id="cf-subject" name="subject">
+          <option>Ginecologia moderna</option>
+          <option>Reposição hormonal / menopausa</option>
+          <option>Emagrecimento</option>
+          <option>Cirurgia íntima</option>
+          <option>Outro assunto</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cf-msg">Mensagem</label>
+        <textarea class="textarea" id="cf-msg" name="message" placeholder="Conte um pouco sobre o que você procura"></textarea>
+      </div>
+      <button class="btn btn-primary contact__submit" type="submit">
+        Enviar pelo WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="contact__disclaimer">Ao enviar, você será direcionada ao WhatsApp para concluir o agendamento.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+  .contact__info h2 {
+    margin-top: 18px;
+  }
+  .contact__info > p {
+    margin-top: 18px;
+    max-width: 42ch;
+  }
+  .contact__list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .contact__list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .contact__ic {
+    width: 48px;
+    height: 48px;
+    flex: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(184, 135, 83, 0.3);
+    color: var(--color-primary);
+  }
+  .contact__ic svg {
+    width: 22px;
+    height: 22px;
+  }
+  .contact__label {
+    display: block;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gold-text);
+    font-weight: 600;
+  }
+  .contact__value {
+    display: block;
+    font-size: 1.02rem;
+    color: var(--color-text);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .contact__social {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .contact__social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(81, 9, 10, 0.18);
+    color: var(--color-brown);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .contact__social a svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+  }
+  .contact__social a:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+  .contact__social a:hover svg {
+    color: var(--color-champagne);
+  }
+
+  .contact__map {
+    margin-top: 28px;
+    height: 120px;
+    border-radius: var(--radius-md);
+    border: 1px dashed rgba(81, 9, 10, 0.24);
+    background:
+      repeating-linear-gradient(45deg, rgba(184, 135, 83, 0.06) 0 14px, transparent 14px 28px),
+      var(--color-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--color-brown);
+    font-size: 0.95rem;
+  }
+  .contact__map strong {
+    color: var(--color-primary);
+  }
+  .contact__map-pin {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    display: grid;
+    place-items: center;
+  }
+  .contact__map-pin svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact__form {
+    padding: 38px 34px;
+  }
+  .contact__form-title {
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 22px;
+  }
+  .field {
+    margin-bottom: 18px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-brown);
+    margin-bottom: 8px;
+  }
+  .contact__submit {
+    width: 100%;
+    margin-top: 6px;
+  }
+  .contact__disclaimer {
+    margin-top: 14px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ whatsappUrl: doctor.whatsappUrl }}>
+  const form = document.querySelector("[data-contact-form]");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = (data.get("name") || "").toString().trim();
+      const phone = (data.get("phone") || "").toString().trim();
+      const subject = (data.get("subject") || "").toString().trim();
+      const message = (data.get("message") || "").toString().trim();
+      const raw =
+        `Olá, Dra. Gabriela! Meu nome é ${name || "(nome)"}.\n` +
+        `Assunto: ${subject}.\n` +
+        (message ? `Mensagem: ${message}.\n` : "") +
+        (phone ? `Meu WhatsApp: ${phone}.` : "");
+      window.open(
+        `${whatsappUrl}?text=${encodeURIComponent(raw)}`,
+        "_blank",
+        "noopener"
+      );
+    });
+  }
+</script>

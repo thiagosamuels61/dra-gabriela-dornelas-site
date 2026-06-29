@@ -1,0 +1,109 @@
+---
+import { content } from "../data/content.ts";
+import PhotoFrame from "./PhotoFrame.astro";
+const { clinic } = content;
+---
+
+<section id="clinica" class="section section-light clinic">
+  <div class="container clinic__grid">
+    <div class="clinic__content">
+      <span class="kicker" data-reveal>{clinic.kicker}</span>
+      <h2 data-reveal data-reveal-delay="1">{clinic.title}</h2>
+      <p class="lead" data-reveal data-reveal-delay="2">{clinic.text}</p>
+      <ul class="clinic__points">
+        {clinic.points.map((pt, i) => (
+          <li data-reveal data-reveal-delay={i + 1}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>{pt}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="clinic__gallery">
+      <div class="clinic__col clinic__col--up" data-reveal="right">
+        <PhotoFrame ratio="3 / 4" tone="nude" caption="Recepção" />
+        <PhotoFrame ratio="1 / 1" tone="wine" caption="Sala de procedimentos" />
+      </div>
+      <div class="clinic__col clinic__col--down" data-reveal="right" data-reveal-delay="2">
+        <PhotoFrame ratio="1 / 1" tone="soft" caption="Consultório" />
+        <PhotoFrame ratio="3 / 4" tone="nude" caption="Ambiente" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clinic__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 72px;
+    align-items: center;
+  }
+  .clinic__content h2 {
+    margin-top: 20px;
+    max-width: 14ch;
+  }
+  .clinic__content .lead {
+    margin-top: 22px;
+    max-width: 46ch;
+  }
+  .clinic__points {
+    list-style: none;
+    margin: 30px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .clinic__points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    font-size: 0.96rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .clinic__points svg {
+    width: 21px;
+    height: 21px;
+    flex: none;
+    margin-top: 1px;
+    color: var(--color-gold);
+    padding: 3px;
+    border: 1px solid rgba(184, 135, 83, 0.4);
+    border-radius: 50%;
+  }
+
+  .clinic__gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .clinic__col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .clinic__col--up {
+    margin-top: -28px;
+  }
+  .clinic__col--down {
+    margin-top: 28px;
+  }
+
+  @media (max-width: 920px) {
+    .clinic__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .clinic__col--up,
+    .clinic__col--down {
+      margin-top: 0;
+    }
+  }
+  @media (max-width: 420px) {
+    .clinic__gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

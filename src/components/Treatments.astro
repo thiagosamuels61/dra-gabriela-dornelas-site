@@ -1,0 +1,196 @@
+---
+import { content } from "../data/content.ts";
+import PhotoFrame from "./PhotoFrame.astro";
+import imgHormonal from "../assets/trat-hormonal.webp";
+import imgCirurgia from "../assets/trat-cirurgia.webp";
+import imgEmagrecimento from "../assets/trat-emagrecimento.webp";
+import imgRegenerativa from "../assets/trat-regenerativa.webp";
+const { treatments } = content;
+// mesma ordem dos grupos em content.ts
+const groupImages = [imgHormonal, imgCirurgia, imgEmagrecimento, imgRegenerativa];
+---
+
+<section id="tratamentos" class="section section-light treatments">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{treatments.kicker}</span>
+      <h2>{treatments.title}</h2>
+      <p class="lead">{treatments.intro}</p>
+    </div>
+
+    <div class="treatments__groups">
+      {treatments.groups.map((group, gi) => (
+        <div class={`tgroup ${gi % 2 === 1 ? "tgroup--reverse" : ""}`}>
+          <div class="tgroup__media" data-reveal={gi % 2 === 1 ? "right" : "left"}>
+            <PhotoFrame
+              ratio="4 / 5"
+              image={groupImages[gi]}
+              alt={group.title}
+              position="center"
+            />
+          </div>
+
+          <div class="tgroup__body" data-reveal={gi % 2 === 1 ? "left" : "right"}>
+            <span class="tgroup__index">{`0${gi + 1}`}</span>
+            <h3 class="tgroup__title">{group.title}</h3>
+            <p class="tgroup__intro">{group.intro}</p>
+
+            <div class="acc" data-accordion>
+              {group.items.map((item, ii) => (
+                <div class={`acc__item ${ii === 0 ? "is-open" : ""}`} data-acc-item>
+                  <button
+                    class="acc__trigger"
+                    data-acc-trigger
+                    aria-expanded={ii === 0 ? "true" : "false"}
+                    aria-controls={`tg-${gi}-${ii}`}
+                  >
+                    <span class="acc__name">{item.name}</span>
+                    <span class="acc__plus" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="acc__panel" id={`tg-${gi}-${ii}`} data-acc-panel role="region">
+                    <div class="acc__panel-inner">
+                      <p>{item.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .treatments .section-head {
+    margin-bottom: 64px;
+  }
+  .treatments__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+  .tgroup {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 64px;
+    align-items: center;
+  }
+  /* nas linhas invertidas, inverte as colunas para o texto continuar na larga */
+  .tgroup--reverse {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+  .tgroup--reverse .tgroup__media {
+    order: 2;
+  }
+  .tgroup__media {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .tgroup__index {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    color: var(--color-gold);
+  }
+  .tgroup__title {
+    margin-top: 6px;
+    font-size: 2rem;
+    color: var(--color-primary);
+  }
+  .tgroup__intro {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    font-size: 1.02rem;
+    color: var(--color-brown);
+    max-width: 46ch;
+  }
+
+  /* ---------- Accordion ---------- */
+  .acc {
+    border-top: 1px solid rgba(81, 9, 10, 0.12);
+  }
+  .acc__item {
+    border-bottom: 1px solid rgba(81, 9, 10, 0.12);
+  }
+  .acc__trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+  }
+  .acc__name {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: color var(--transition);
+  }
+  .acc__item.is-open .acc__name,
+  .acc__trigger:hover .acc__name {
+    color: var(--color-primary);
+  }
+  .acc__plus {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(81, 9, 10, 0.24);
+    border-radius: 50%;
+    color: var(--color-primary);
+    transition: transform 0.4s var(--ease-out), background 0.3s ease, color 0.3s ease;
+  }
+  .acc__plus svg {
+    width: 15px;
+    height: 15px;
+  }
+  .acc__item.is-open .acc__plus {
+    transform: rotate(135deg);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+  .acc__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.42s var(--ease-out);
+  }
+  .acc__item.is-open .acc__panel {
+    grid-template-rows: 1fr;
+  }
+  .acc__panel-inner {
+    overflow: hidden;
+  }
+  .acc__panel-inner p {
+    padding: 0 4px 20px;
+    font-size: 0.94rem;
+    line-height: 1.66;
+  }
+
+  @media (max-width: 900px) {
+    .tgroup,
+    .tgroup--reverse {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+    .tgroup--reverse .tgroup__media {
+      order: 0;
+      margin: 0 auto;
+    }
+    .tgroup__media {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+</style>

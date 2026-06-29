@@ -1,0 +1,133 @@
+---
+import { content } from "../data/content.ts";
+const { integralCare } = content;
+const [lead, ...rest] = integralCare.paragraphs;
+---
+
+<section id="cuidado" class="section section-soft integral">
+  <span class="integral__mono" aria-hidden="true">G</span>
+  <div class="container integral__grid">
+    <div class="integral__intro">
+      <span class="kicker" data-reveal>{integralCare.kicker}</span>
+      <h2 data-reveal data-reveal-delay="1">{integralCare.title}</h2>
+      <span class="integral__rule" data-reveal data-reveal-delay="2"></span>
+      <p class="integral__lead text-large" data-reveal data-reveal-delay="2">{lead}</p>
+    </div>
+
+    <div class="integral__detail">
+      <div class="integral__paras">
+        {rest.map((p, i) => (
+          <p data-reveal data-reveal-delay={i + 1}>{p}</p>
+        ))}
+      </div>
+
+      <ul class="integral__points">
+        {integralCare.points.map((pt, i) => (
+          <li data-reveal data-reveal-delay={i + 1}>
+            <span class="integral__check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span>{pt}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .integral {
+    position: relative;
+    overflow: hidden;
+  }
+  .integral__mono {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-title);
+    font-size: clamp(28rem, 46vw, 52rem);
+    line-height: 1;
+    color: rgba(184, 135, 83, 0.05);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .integral__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+    gap: 72px;
+    align-items: start;
+  }
+  .integral__intro h2 {
+    margin-top: 22px;
+    max-width: 13ch;
+  }
+  .integral__rule {
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin: 30px 0;
+    background: linear-gradient(90deg, var(--color-gold), transparent);
+  }
+  .integral__lead {
+    color: var(--color-brown);
+    max-width: 44ch;
+  }
+
+  .integral__detail {
+    padding-top: 6px;
+  }
+  .integral__paras {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .integral__points {
+    list-style: none;
+    margin: 38px 0 0;
+    padding: 34px 0 0;
+    border-top: 1px solid rgba(184, 135, 83, 0.24);
+    display: grid;
+    gap: 20px;
+  }
+  .integral__points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .integral__check {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--color-gold);
+    border: 1px solid rgba(184, 135, 83, 0.4);
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .integral__check svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 920px) {
+    .integral__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .integral__rule {
+      margin: 24px 0;
+    }
+    .integral__intro h2 {
+      max-width: none;
+    }
+  }
+</style>

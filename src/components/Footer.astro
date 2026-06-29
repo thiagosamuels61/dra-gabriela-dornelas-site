@@ -1,0 +1,172 @@
+---
+import { content } from "../data/content.ts";
+import Brand from "./Brand.astro";
+const { footer, nav, doctor } = content;
+const navCols = [nav.slice(0, 4), nav.slice(4)];
+---
+
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <Brand variant="footer" />
+      <p class="footer__tagline">{footer.tagline}</p>
+      <div class="footer__social">
+        <a href={doctor.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href={doctor.whatsappUrl} target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18.5 4 22l3.6-1.4A8.5 8.5 0 1 0 4.2 16Z"/><path d="M9 9.5c.3 2 1.8 3.7 3.6 4.4l1-1.2 1.8.6.3 1.9c-2.7.8-6.4-1.4-7.4-4.6Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav class="footer__nav" aria-label="Rodapé">
+      {navCols.map((col) => (
+        <ul>
+          {col.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      ))}
+    </nav>
+
+    <div class="footer__contact">
+      <span class="footer__col-title">Atendimento</span>
+      <p>{doctor.city}</p>
+      <p>{doctor.instagram}</p>
+      <p>{doctor.bioSite}</p>
+      <a class="btn btn-gold footer__cta" href={doctor.whatsappUrl} target="_blank" rel="noopener">
+        Agendar consulta
+      </a>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <span>{footer.legal}</span>
+      <span class="footer__resp">{footer.responsible}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-primary-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding-top: 72px;
+  }
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(184, 135, 83, 0.18);
+  }
+  .footer__tagline {
+    margin-top: 22px;
+    max-width: 34ch;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.95rem;
+  }
+  .footer__social {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+  }
+  .footer__social a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(184, 135, 83, 0.34);
+    color: var(--color-gold-soft);
+    transition: var(--transition);
+  }
+  .footer__social a svg {
+    width: 20px;
+    height: 20px;
+  }
+  .footer__social a:hover {
+    background: var(--color-gold);
+    color: var(--color-primary-dark);
+    border-color: var(--color-gold);
+  }
+
+  .footer__nav {
+    display: flex;
+    gap: 40px;
+    padding-top: 6px;
+  }
+  .footer__nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .footer__nav a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color var(--transition);
+  }
+  .footer__nav a:hover {
+    color: var(--color-gold-soft);
+  }
+
+  .footer__col-title {
+    display: block;
+    font-family: var(--font-logo);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-gold-soft);
+    margin-bottom: 18px;
+  }
+  .footer__contact p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+  }
+  .footer__cta {
+    margin-top: 18px;
+    min-height: 46px;
+    padding: 0 22px;
+    font-size: 0.76rem;
+  }
+
+  .footer__bar {
+    padding: 22px 0;
+  }
+  .footer__bar-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 860px) {
+    .footer__top {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 540px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+    }
+    .footer__nav {
+      gap: 56px;
+    }
+    .footer__bar-inner {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

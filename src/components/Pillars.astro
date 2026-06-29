@@ -1,0 +1,109 @@
+---
+import { content } from "../data/content.ts";
+import Icon from "./Icon.astro";
+const { pillars } = content;
+---
+
+<section id="pilares" class="section section-light pillars">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{pillars.kicker}</span>
+      <h2>{pillars.title}</h2>
+      <p class="lead">{pillars.intro}</p>
+    </div>
+
+    <div class="pillars__grid">
+      {pillars.items.map((item, i) => (
+        <article class="pillar" data-reveal data-reveal-delay={(i % 4) + 1}>
+          <span class="pillar__icon"><Icon name={item.key} /></span>
+          <h3 class="pillar__title">{item.title}</h3>
+          <p class="pillar__text">{item.text}</p>
+          <span class="pillar__num">{`0${i + 1}`}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pillars .section-head {
+    margin-bottom: 60px;
+  }
+  .pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .pillar {
+    position: relative;
+    padding: 38px 30px 34px;
+    background: var(--color-white);
+    border: 1px solid rgba(184, 135, 83, 0.18);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  }
+  .pillar::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-primary));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.45s var(--ease-out);
+  }
+  .pillar:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
+    border-color: rgba(184, 135, 83, 0.4);
+  }
+  .pillar:hover::before {
+    transform: scaleX(1);
+  }
+  .pillar__icon {
+    width: 72px;
+    height: 72px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    border: 1px solid rgba(81, 9, 10, 0.32);
+    border-radius: 50%;
+    background: rgba(247, 242, 238, 0.8);
+  }
+  .pillar__icon :global(svg) {
+    width: 40px;
+    height: 40px;
+  }
+  .pillar__title {
+    margin-top: 24px;
+    font-size: 1.42rem;
+    color: var(--color-primary);
+  }
+  .pillar__text {
+    margin-top: 14px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .pillar__num {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: rgba(184, 135, 83, 0.5);
+  }
+
+  @media (max-width: 1080px) {
+    .pillars__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .pillars__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

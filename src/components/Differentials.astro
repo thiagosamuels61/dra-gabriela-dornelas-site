@@ -1,0 +1,101 @@
+---
+import { content } from "../data/content.ts";
+const { differentials } = content;
+
+const icons = [
+  // Escuta sem pressa — balão de conversa
+  '<path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 4 11.5 8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"/>',
+  // Decisões compartilhadas — duas pessoas
+  '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  // Discrição — escudo
+  '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  // Ciência — sparkle
+  '<path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/>',
+  // Cuidado integrado — camadas
+  '<path d="M12 2 2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+  // Acompanhamento — ciclo
+  '<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>',
+];
+---
+
+<section id="diferenciais" class="section section-cream diffs">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{differentials.kicker}</span>
+      <h2>{differentials.title}</h2>
+      <p class="lead">{differentials.intro}</p>
+    </div>
+
+    <div class="diffs__grid">
+      {differentials.items.map((item, i) => (
+        <article class="diff" data-reveal data-reveal-delay={(i % 3) + 1}>
+          <span class="diff__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i % icons.length]}></svg>
+          </span>
+          <h3 class="diff__title">{item.title}</h3>
+          <p class="diff__text">{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .diffs .section-head {
+    margin-bottom: 56px;
+  }
+  .diffs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .diff {
+    padding: 34px 30px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(184, 135, 83, 0.2);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  }
+  .diff:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(184, 135, 83, 0.4);
+  }
+  .diff__icon {
+    width: 58px;
+    height: 58px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--color-primary);
+    border: 1px solid rgba(81, 9, 10, 0.18);
+    background: rgba(247, 242, 238, 0.8);
+  }
+  .diff__icon svg {
+    width: 26px;
+    height: 26px;
+  }
+  .diff__title {
+    margin-top: 22px;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+  }
+  .diff__text {
+    margin-top: 12px;
+    font-size: 0.94rem;
+    line-height: 1.64;
+  }
+
+  @media (max-width: 900px) {
+    .diffs__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .diffs__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

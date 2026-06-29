@@ -1,0 +1,36 @@
+---
+import gineco from "../icons/icon-gineco.svg?raw";
+import hormonal from "../icons/icon-hormonal.svg?raw";
+import emagrecimento from "../icons/icon-emagrecimento.svg?raw";
+import cirurgia from "../icons/icon-cirurgia.svg?raw";
+import sparkle from "../icons/sparkle.svg?raw";
+
+const map: Record<string, string> = {
+  gineco,
+  hormonal,
+  emagrecimento,
+  cirurgia,
+  sparkle,
+};
+
+interface Props {
+  name: keyof typeof map | string;
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+const svg = map[name] ?? "";
+---
+
+<span class={`icon ${className ?? ""}`} set:html={svg} aria-hidden="true" />
+
+<style>
+  .icon {
+    display: inline-flex;
+    line-height: 0;
+  }
+  .icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

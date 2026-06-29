@@ -1,0 +1,117 @@
+---
+import { content } from "../data/content.ts";
+const { process } = content;
+---
+
+<section id="processo" class="section section-soft process">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{process.kicker}</span>
+      <h2>{process.title}</h2>
+      <p class="lead">{process.intro}</p>
+    </div>
+
+    <div class="process__timeline" data-timeline>
+      <div class="process__rail" aria-hidden="true">
+        <span class="process__rail-progress" data-timeline-progress></span>
+      </div>
+
+      {process.steps.map((step, i) => (
+        <div class="process__step" data-reveal data-reveal-delay={(i % 2) + 1}>
+          <div class="process__dot"><span>{i + 1}</span></div>
+          <div class="process__content">
+            <h3 class="process__step-title">{step.title}</h3>
+            <p class="process__step-text">{step.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process .section-head {
+    margin-bottom: 60px;
+  }
+  .process__timeline {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: 8px;
+  }
+  .process__rail {
+    position: absolute;
+    left: 27px;
+    top: 16px;
+    bottom: 16px;
+    width: 2px;
+    background: rgba(81, 9, 10, 0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .process__rail-progress {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--color-gold), var(--color-primary));
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  .process__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 26px;
+    align-items: flex-start;
+    padding: 18px 0;
+  }
+  .process__step:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  .process__dot {
+    position: relative;
+    z-index: 2;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--color-bg-soft);
+    border: 1px solid rgba(184, 135, 83, 0.5);
+    box-shadow: 0 0 0 6px var(--color-bg-soft);
+  }
+  .process__dot span {
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    color: var(--color-primary);
+  }
+  .process__content {
+    padding-top: 6px;
+  }
+  .process__step-title {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+  .process__step-text {
+    margin-top: 10px;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 560px) {
+    .process__step {
+      grid-template-columns: 48px 1fr;
+      gap: 18px;
+    }
+    .process__rail {
+      left: 23px;
+    }
+    .process__dot {
+      width: 48px;
+      height: 48px;
+    }
+    .process__dot span {
+      font-size: 1.3rem;
+    }
+  }
+</style>

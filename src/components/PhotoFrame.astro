@@ -1,0 +1,125 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  ratio?: string; // ex: "3 / 4"
+  arch?: boolean;
+  caption?: string;
+  tone?: "nude" | "wine" | "soft";
+  class?: string;
+  image?: ImageMetadata;
+  alt?: string;
+  position?: string; // object-position quando houver imagem
+}
+const {
+  ratio = "3 / 4",
+  arch = false,
+  caption = "Imagem · Dra. Gabriela Dornelas",
+  tone = "nude",
+  class: className = "",
+  image,
+  alt = "",
+  position = "center top",
+} = Astro.props;
+---
+
+<figure
+  class={`photo photo--${tone} ${arch ? "photo--arch" : ""} ${image ? "photo--filled" : ""} ${className}`}
+  style={`--ratio:${ratio}; --pos:${position}`}
+  data-replace={image ? undefined : "foto"}
+>
+  {image ? (
+    <Image
+      class="photo__img"
+      src={image}
+      alt={alt}
+      widths={[420, 700, 900]}
+      sizes="(max-width: 900px) 90vw, 420px"
+      loading="lazy"
+    />
+  ) : (
+    <>
+      <span class="photo__mono" aria-hidden="true">G</span>
+      <span class="photo__leaf" aria-hidden="true"></span>
+      <figcaption class="photo__cap">{caption}</figcaption>
+    </>
+  )}
+</figure>
+
+<style>
+  .photo {
+    position: relative;
+    margin: 0;
+    aspect-ratio: var(--ratio);
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(184, 135, 83, 0.32);
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  .photo--arch {
+    border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 32% 32% var(--radius-lg) var(--radius-lg);
+  }
+  .photo--nude {
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%),
+      linear-gradient(160deg, #f4e4d8 0%, #e7c7b1 55%, #d8a98c 100%);
+  }
+  .photo--soft {
+    background: linear-gradient(160deg, #faf5f0 0%, #efe2d6 100%);
+  }
+  .photo--wine {
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(184, 135, 83, 0.25), transparent 55%),
+      linear-gradient(160deg, #5a1416 0%, #340a0c 100%);
+  }
+  .photo__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pos, center top);
+    display: block;
+  }
+  .photo--filled {
+    background: var(--color-cream);
+  }
+  .photo__mono {
+    font-family: var(--font-title);
+    font-size: clamp(7rem, 16vw, 13rem);
+    font-weight: 600;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.34);
+    user-select: none;
+  }
+  .photo--wine .photo__mono {
+    color: rgba(200, 155, 94, 0.32);
+  }
+  .photo__leaf {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .photo--wine .photo__leaf {
+    border-color: rgba(184, 135, 83, 0.34);
+  }
+  .photo__cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    text-align: center;
+    font-family: var(--font-logo);
+    font-size: 0.56rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(82, 56, 46, 0.62);
+  }
+  .photo--wine .photo__cap {
+    color: rgba(255, 255, 255, 0.5);
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+import { content } from "../data/content.ts";
+const { faq, doctor } = content;
+---
+
+<section id="duvidas" class="section section-soft faq">
+  <div class="container faq__grid">
+    <div class="faq__aside">
+      <span class="kicker" data-reveal>{faq.kicker}</span>
+      <h2 data-reveal data-reveal-delay="1">{faq.title}</h2>
+      <p data-reveal data-reveal-delay="2">
+        Não encontrou a sua dúvida? Fale diretamente com a equipe e tire todas as suas perguntas antes de agendar.
+      </p>
+      <a class="btn btn-secondary" href={doctor.whatsappUrl} target="_blank" rel="noopener" data-reveal data-reveal-delay="3">
+        Falar com a equipe
+      </a>
+    </div>
+
+    <div class="faq__list acc" data-accordion data-reveal>
+      {faq.items.map((item, i) => (
+        <div class={`acc__item faq__item ${i === 0 ? "is-open" : ""}`} data-acc-item>
+          <button class="acc__trigger faq__trigger" data-acc-trigger aria-expanded={i === 0 ? "true" : "false"} aria-controls={`faq-panel-${i}`}>
+            <span class="faq__q">{item.q}</span>
+            <span class="acc__plus" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </button>
+          <div class="acc__panel" id={`faq-panel-${i}`} data-acc-panel role="region">
+            <div class="acc__panel-inner">
+              <p>{item.a}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 64px;
+    align-items: start;
+  }
+  .faq__aside {
+    position: sticky;
+    top: 110px;
+  }
+  .faq__aside h2 {
+    margin-top: 20px;
+  }
+  .faq__aside p {
+    margin-top: 18px;
+    max-width: 34ch;
+  }
+  .faq__aside .btn {
+    margin-top: 26px;
+  }
+
+  .faq__list {
+    border-top: 1px solid rgba(81, 9, 10, 0.12);
+  }
+  .faq__item {
+    border-bottom: 1px solid rgba(81, 9, 10, 0.12);
+  }
+  .faq__trigger {
+    padding: 24px 4px;
+  }
+  .faq__q {
+    font-family: var(--font-title);
+    font-size: 1.32rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-text);
+    transition: color var(--transition);
+  }
+  .faq__item.is-open .faq__q,
+  .faq__trigger:hover .faq__q {
+    color: var(--color-primary);
+  }
+  .faq__list .acc__panel-inner p {
+    padding: 0 4px 24px;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  @media (max-width: 920px) {
+    .faq__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .faq__aside {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Global — animacoes, utilitarios e elementos de UI compartilhados
+   ========================================================================== */
+
+/* ---------- Reveal on scroll (IntersectionObserver adiciona .is-in) ----------
+   A ocultacao inicial so acontece com JS ativo (.js no <html>), para que o
+   conteudo permaneca visivel caso o bundle falhe ou o JS esteja desligado. */
+[data-reveal] {
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.js [data-reveal="left"] {
+  transform: translateX(-40px);
+}
+.js [data-reveal="right"] {
+  transform: translateX(40px);
+}
+.js [data-reveal="scale"] {
+  transform: scale(0.94);
+}
+[data-reveal-delay="1"] {
+  transition-delay: 0.08s;
+}
+[data-reveal-delay="2"] {
+  transition-delay: 0.16s;
+}
+[data-reveal-delay="3"] {
+  transition-delay: 0.24s;
+}
+[data-reveal-delay="4"] {
+  transition-delay: 0.32s;
+}
+[data-reveal-delay="5"] {
+  transition-delay: 0.4s;
+}
+
+/* Reveal de imagem com clip-path */
+[data-reveal-clip] {
+  transition: clip-path 1.1s var(--ease-out);
+}
+.js [data-reveal-clip] {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* estados revelados (depois das regras .js para vencer em ordem de cascata) */
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal-clip].is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Hero intro: oculta elementos secundarios apenas quando havera animacao */
+.has-motion [data-hero-in] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal],
+  [data-reveal-clip] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-primary));
+  z-index: 120;
+  pointer-events: none;
+}
+
+/* ---------- Decorative gold hairline ---------- */
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184, 135, 83, 0.5),
+    transparent
+  );
+}
+
+/* ---------- Eyebrow divider dot ---------- */
+.dot-sep {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  display: inline-block;
+}
+
+/* ---------- Utility ---------- */
+.u-center {
+  text-align: center;
+}
+.grid-auto {
+  display: grid;
+  gap: 28px;
+}
+.muted {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Back to top ---------- */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 135, 83, 0.4);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: var(--transition);
+  z-index: 90;
+  cursor: pointer;
+}
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.to-top:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* ---------- Accordion (compartilhado: Tratamentos + FAQ) ---------- */
+.acc {
+  border-top: 1px solid rgba(81, 9, 10, 0.12);
+}
+.acc__item {
+  border-bottom: 1px solid rgba(81, 9, 10, 0.12);
+}
+.acc__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+}
+.acc__name {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+.acc__item.is-open .acc__name,
+.acc__trigger:hover .acc__name {
+  color: var(--color-primary);
+}
+.acc__plus {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(81, 9, 10, 0.24);
+  border-radius: 50%;
+  color: var(--color-primary);
+  transition: transform 0.4s var(--ease-out), background 0.3s ease, color 0.3s ease;
+}
+.acc__plus svg {
+  width: 15px;
+  height: 15px;
+}
+.acc__item.is-open .acc__plus {
+  transform: rotate(135deg);
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+.acc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.42s var(--ease-out), visibility 0s linear 0.42s;
+}
+.acc__item.is-open .acc__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.42s var(--ease-out), visibility 0s;
+}
+.acc__panel-inner {
+  overflow: hidden;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(81, 9, 10, 0.16);
+  color: var(--color-primary);
+}
+
+/* ---------- Scrollbar (sutil) ---------- */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-soft);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(81, 9, 10, 0.22);
+    border-radius: 999px;
+    border: 3px solid var(--color-bg-soft);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(81, 9, 10, 0.4);
+  }
+}

@@ -1,0 +1,120 @@
+---
+import { content } from "../data/content.ts";
+const { lifePhases, doctor } = content;
+---
+
+<section id="fases" class="section section-cream phases">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="kicker">{lifePhases.kicker}</span>
+      <h2>{lifePhases.title}</h2>
+      <p class="lead">{lifePhases.intro}</p>
+    </div>
+
+    <div class="phases__grid">
+      {lifePhases.items.map((item, i) => (
+        <article class="phase-card" data-reveal data-reveal-delay={(i % 3) + 1}>
+          <span class="phase-card__index">{`0${i + 1}`}</span>
+          <h3 class="phase-card__title">{item.title}</h3>
+          <p class="phase-card__text">{item.text}</p>
+          <span class="phase-card__line" aria-hidden="true"></span>
+        </article>
+      ))}
+
+      <article class="phase-cta" data-reveal data-reveal-delay="2">
+        <div>
+          <h3 class="phase-cta__title">{lifePhases.ctaCard.title}</h3>
+          <p class="phase-cta__text">{lifePhases.ctaCard.text}</p>
+        </div>
+        <a class="btn btn-gold" href={doctor.whatsappUrl} target="_blank" rel="noopener">
+          {lifePhases.ctaCard.ctaLabel}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .phases .section-head {
+    margin-bottom: 54px;
+  }
+  .phases__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .phase-card {
+    position: relative;
+    padding: 34px 30px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(184, 135, 83, 0.2);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  }
+  .phase-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+  }
+  .phase-card__index {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--color-gold);
+  }
+  .phase-card__title {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+  }
+  .phase-card__text {
+    margin-top: 14px;
+    font-size: 0.92rem;
+    line-height: 1.62;
+  }
+  .phase-card__line {
+    display: block;
+    width: 40px;
+    height: 2px;
+    margin-top: 22px;
+    background: linear-gradient(90deg, var(--color-gold), transparent);
+  }
+
+  .phase-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 38px 34px;
+    border-radius: var(--radius-lg);
+    color: var(--color-white);
+    background:
+      radial-gradient(120% 120% at 100% 0%, rgba(172, 15, 20, 0.5), transparent 55%),
+      var(--color-primary);
+    box-shadow: var(--shadow-card);
+  }
+  .phase-cta__title {
+    color: var(--color-white);
+    font-size: 1.7rem;
+    line-height: 1.05;
+  }
+  .phase-cta__text {
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+  }
+  .phase-cta .btn {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 900px) {
+    .phases__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 580px) {
+    .phases__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

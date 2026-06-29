@@ -1,0 +1,358 @@
+/* ==========================================================================
+   Design System — Dra. Gabriela Dornelas
+   Tokens + base (fontes carregadas via @fontsource no layout Base.astro)
+   ========================================================================== */
+
+:root {
+  /* Brand Colors */
+  --color-primary: #51090a;
+  --color-primary-dark: #1a0d0e;
+  --color-accent: #ac0f14;
+  --color-terracotta: #a45b42;
+  --color-brown: #553e36;
+  --color-nude: #c5886c;
+  --color-champagne: #eab794;
+  --color-gold: #b88753;
+  --color-gold-deep: #a9743b;
+  --color-gold-soft: #c89b5e;
+  --color-gold-text: #7c5220; /* dourado escuro p/ TEXTO pequeno (contraste AA em fundos claros) */
+  --color-bg: #f0eeee;
+  --color-bg-soft: #f7f2ee;
+  --color-bg-warm: #eab794;
+  --color-cream: #f3ece4;
+  --color-text: #1a0d0e;
+  --color-text-muted: #6b6058;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-title: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-logo: "Cinzel", serif;
+
+  /* Layout */
+  --container: 1200px;
+  --container-wide: 1320px;
+  --section-padding: 96px;
+  --section-padding-mobile: 64px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 20px 60px rgba(26, 13, 14, 0.08);
+  --shadow-card: 0 16px 40px rgba(81, 9, 10, 0.12);
+  --shadow-float: 0 30px 80px rgba(26, 13, 14, 0.18);
+
+  /* Transitions */
+  --transition: 0.25s ease;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Lenis controla o scroll; desliga o smooth nativo quando ativo */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.035em;
+}
+
+h1 {
+  font-size: clamp(3.2rem, 6vw, 6.8rem);
+  line-height: 0.92;
+}
+
+h2 {
+  font-size: clamp(2.4rem, 4vw, 4.4rem);
+  line-height: 1.02;
+}
+
+h3 {
+  font-size: clamp(1.7rem, 2.4vw, 2.6rem);
+  line-height: 1.1;
+}
+
+p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.text-large {
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.logo-text {
+  font-family: var(--font-logo);
+  letter-spacing: 0.18em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+}
+
+.section {
+  padding: var(--section-padding) 0;
+  position: relative;
+}
+
+.section-light {
+  background: var(--color-bg);
+}
+.section-soft {
+  background: var(--color-bg-soft);
+}
+.section-cream {
+  background: linear-gradient(180deg, var(--color-bg-soft), var(--color-cream));
+}
+.section-dark {
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+}
+.section-dark h2,
+.section-dark h3 {
+  color: var(--color-white);
+}
+.section-dark p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- Section heading helper ---------- */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-logo);
+  color: var(--color-gold-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.kicker::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+.kicker--center::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.section-head {
+  max-width: 720px;
+}
+.section-head--center {
+  margin: 0 auto;
+  text-align: center;
+}
+.section-head h2 {
+  margin-top: 22px;
+}
+.section-head .lead {
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+.accent {
+  color: var(--color-primary);
+}
+.accent-gold {
+  color: var(--color-gold);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 32px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: rgba(81, 9, 10, 0.24);
+}
+.btn-secondary:hover {
+  background: rgba(81, 9, 10, 0.06);
+}
+.btn-ghost-light {
+  background: transparent;
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  border-color: var(--color-gold);
+}
+.btn-gold:hover {
+  background: var(--color-gold-soft);
+  transform: translateY(-2px);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(184, 135, 83, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+.card-dark {
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  border: 1px solid rgba(184, 135, 83, 0.28);
+}
+.card-dark p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- Service icon (circulo do design system) ---------- */
+.service-icon {
+  width: 72px;
+  height: 72px;
+  border: 1px solid rgba(81, 9, 10, 0.32);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.35);
+}
+.service-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* ---------- Forms ---------- */
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: 54px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(81, 9, 10, 0.16);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0 18px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--color-text);
+  outline: none;
+  transition: var(--transition);
+}
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(184, 135, 83, 0.12);
+}
+.textarea {
+  min-height: 140px;
+  padding-top: 16px;
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--section-padding-mobile) 0;
+  }
+  .container {
+    padding: 0 20px;
+  }
+}
