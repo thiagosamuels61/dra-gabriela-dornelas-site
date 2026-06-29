@@ -34,7 +34,10 @@ function initReveals() {
   );
   if (!els.length) return;
 
-  if (prefersReduced) {
+  // Mantemos o reveal no scroll mesmo sob prefers-reduced-motion: o CSS
+  // reduz para um fade somente de opacidade (sem movimento), garantindo a
+  // animacao de entrada em todos os dispositivos. Fallback sem IO: mostra tudo.
+  if (!("IntersectionObserver" in window)) {
     els.forEach((el) => el.classList.add("is-in"));
     return;
   }

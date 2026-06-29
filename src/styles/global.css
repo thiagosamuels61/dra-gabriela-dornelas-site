@@ -68,11 +68,19 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+  /* Mesmo com "reduzir movimento" ligado, mantemos uma entrada suave —
+     apenas FADE de opacidade, sem qualquer deslocamento/parallax. Isso
+     respeita a preferência (reduzir MOVIMENTO) sem abrir mao da animacao,
+     garantindo o fade-in em todos os dispositivos. */
   [data-reveal],
   [data-reveal-clip] {
-    opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    transition: opacity 0.7s ease !important;
+  }
+  [data-reveal].is-in,
+  [data-reveal-clip].is-in {
+    opacity: 1 !important;
   }
 }
 
