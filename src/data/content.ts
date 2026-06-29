@@ -392,11 +392,16 @@ export const content: SiteContent = {
         ],
       },
       {
-        title: 'Hormônios & contracepção',
+        title: 'Reposição hormonal',
         items: [
           { name: 'Reposição hormonal feminina', price: 'a partir de R$ 550' },
           { name: 'Implantes hormonais', price: 'a partir de R$ 3.500' },
           { name: 'Implante transdérmico (Implanon)', price: 'R$ 1.900' },
+        ],
+      },
+      {
+        title: 'Contracepção (DIU & implantes)',
+        items: [
           { name: 'Inserção de DIU de cobre', price: 'a partir de R$ 750' },
           { name: 'Inserção de DIU hormonal / Mirena', price: 'R$ 2.300' },
           { name: 'Retirada de DIU', price: 'R$ 550' },
@@ -414,21 +419,21 @@ export const content: SiteContent = {
         ],
       },
       {
-        title: 'Cirurgia íntima & procedimentos',
+        title: 'Cirurgia íntima',
         items: [
           { name: 'Cirurgia íntima', price: 'a partir de R$ 8.500' },
           { name: 'Ninfoplastia', price: 'R$ 8.500' },
           { name: 'Cirurgia ginecológica', price: 'individualizado' },
           { name: 'Drenagem da glândula de Bartholin', price: 'a partir de R$ 500' },
-          { name: 'Cauterização de verrugas (HPV)', price: 'a partir de R$ 300' },
-          { name: 'Biópsia de vulva', price: 'a partir de R$ 550' },
-          { name: 'Biópsia de endométrio', price: 'R$ 500' },
         ],
       },
       {
-        title: 'Emagrecimento',
+        title: 'Exames & acompanhamento',
         items: [
-          { name: 'Tratamento de emagrecimento', price: 'individualizado' },
+          { name: 'Cauterização de verrugas (HPV)', price: 'a partir de R$ 300' },
+          { name: 'Biópsia de vulva', price: 'a partir de R$ 550' },
+          { name: 'Biópsia de endométrio', price: 'R$ 500' },
+          { name: 'Acompanhamento de emagrecimento', price: 'individualizado' },
         ],
       },
     ],
