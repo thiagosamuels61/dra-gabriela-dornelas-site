@@ -18,6 +18,7 @@ export interface SiteContent {
     whatsappUrl: string;
     whatsappPhone: string;
     reviewUrl: string;
+    mapsUrl: string;
   };
   nav: { label: string; href: string }[];
   hero: {
@@ -50,6 +51,15 @@ export interface SiteContent {
     intro: string;
     highlights: string[];
     groups: { title: string; intro: string; items: { name: string; text: string }[] }[];
+  };
+  conditions: { kicker: string; title: string; intro: string; items: string[] };
+  pricing: {
+    kicker: string;
+    title: string;
+    intro: string;
+    note: string;
+    ctaLabel: string;
+    groups: { title: string; items: { name: string; price: string }[] }[];
   };
   process: { kicker: string; title: string; intro: string; steps: { title: string; text: string }[] };
   about: {
@@ -86,6 +96,7 @@ export const content: SiteContent = {
     whatsappPhone: '5561996925550',
     reviewUrl:
       'https://www.doctoralia.com.br/adicionar-opiniao/gabriela-alves-de-moura-dornelas?doctor_id=1017193#/opiniao',
+    mapsUrl: 'https://www.google.com/maps?q=-15.7337456,-47.8976631',
   },
 
   nav: [
@@ -94,6 +105,7 @@ export const content: SiteContent = {
     { label: 'Pilares', href: '#pilares' },
     { label: 'Fases da vida', href: '#fases' },
     { label: 'Tratamentos', href: '#tratamentos' },
+    { label: 'Valores', href: '#valores' },
     { label: 'Sobre', href: '#sobre' },
     { label: 'Dúvidas', href: '#duvidas' },
     { label: 'Contato', href: '#contato' },
@@ -332,6 +344,91 @@ export const content: SiteContent = {
             text:
               'Abordagem de queixas de ressecamento e desconforto na relação, integrando saúde íntima, hormonal e emocional.',
           },
+        ],
+      },
+    ],
+  },
+
+  conditions: {
+    kicker: 'Condições que acompanhamos',
+    title: 'Cuidado para as principais queixas da saúde íntima e hormonal',
+    intro:
+      'Da rotina ginecológica a queixas mais específicas, o acompanhamento abrange uma ampla gama de condições — sempre com avaliação individualizada e conduta baseada em evidências.',
+    items: [
+      'Menopausa e menopausa precoce',
+      'Fogachos e sintomas do climatério',
+      'Desequilíbrios hormonais',
+      'Síndrome dos ovários policísticos (SOP)',
+      'Tensão pré-menstrual (TPM)',
+      'Ressecamento e atrofia vaginal',
+      'Atrofia vulvar',
+      'Dor na relação sexual',
+      'Vaginismo',
+      'Vulvodínia',
+      'Líquen escleroso vulvar',
+      'Vaginite e vaginose bacteriana',
+      'Corrimento vaginal',
+      'HPV',
+      'Bartholinite',
+    ],
+  },
+
+  pricing: {
+    kicker: 'Valores',
+    title: 'Investimento no seu cuidado',
+    intro:
+      'Valores de referência para os principais atendimentos e procedimentos. O plano é sempre individualizado — formas de pagamento e detalhes são definidos na avaliação.',
+    note: 'Valores de referência, sujeitos a avaliação individual. Atendimento particular, com emissão de nota fiscal para solicitação de reembolso.',
+    ctaLabel: 'Agendar consulta',
+    groups: [
+      {
+        title: 'Consultas & avaliação',
+        items: [
+          { name: 'Primeira consulta (ginecologia e obstetrícia)', price: 'R$ 550' },
+          { name: 'Teleconsulta', price: 'R$ 550' },
+          { name: 'Check-up ginecológico', price: 'R$ 550' },
+          { name: 'Análise e solicitação de exames', price: 'R$ 550' },
+          { name: 'Bioimpedância', price: 'R$ 150' },
+        ],
+      },
+      {
+        title: 'Hormônios & contracepção',
+        items: [
+          { name: 'Reposição hormonal feminina', price: 'a partir de R$ 550' },
+          { name: 'Implantes hormonais', price: 'a partir de R$ 3.500' },
+          { name: 'Implante transdérmico (Implanon)', price: 'R$ 1.900' },
+          { name: 'Inserção de DIU de cobre', price: 'a partir de R$ 750' },
+          { name: 'Inserção de DIU hormonal / Mirena', price: 'R$ 2.300' },
+          { name: 'Retirada de DIU', price: 'R$ 550' },
+          { name: 'Retirada de implante (Implanon)', price: 'R$ 650' },
+        ],
+      },
+      {
+        title: 'Laser & regenerativa íntima',
+        items: [
+          { name: 'Laser íntimo de CO₂ / vaginal', price: 'R$ 1.800' },
+          { name: 'Laserterapia', price: 'R$ 1.800' },
+          { name: 'Harmonização genital', price: 'a partir de R$ 2.500' },
+          { name: 'Clareamento íntimo', price: 'a partir de R$ 500' },
+          { name: 'Ultrassom microfocado', price: 'individualizado' },
+        ],
+      },
+      {
+        title: 'Cirurgia íntima & procedimentos',
+        items: [
+          { name: 'Cirurgia íntima', price: 'a partir de R$ 8.500' },
+          { name: 'Ninfoplastia', price: 'R$ 8.500' },
+          { name: 'Cirurgia ginecológica', price: 'individualizado' },
+          { name: 'Drenagem da glândula de Bartholin', price: 'a partir de R$ 500' },
+          { name: 'Cauterização de verrugas (HPV)', price: 'a partir de R$ 300' },
+          { name: 'Biópsia de vulva', price: 'a partir de R$ 550' },
+          { name: 'Biópsia de endométrio', price: 'R$ 500' },
+        ],
+      },
+      {
+        title: 'Emagrecimento',
+        items: [
+          { name: 'Tratamento de emagrecimento', price: 'individualizado' },
         ],
       },
     ],

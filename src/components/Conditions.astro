@@ -1,0 +1,63 @@
+---
+import { content } from "../data/content.ts";
+const { conditions } = content;
+---
+
+<section id="condicoes" class="section section-soft conditions">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{conditions.kicker}</span>
+      <h2>{conditions.title}</h2>
+      <p class="lead">{conditions.intro}</p>
+    </div>
+
+    <ul class="conditions__grid" data-reveal data-reveal-delay="1">
+      {conditions.items.map((c) => (
+        <li class="conditions__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>{c}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .conditions .section-head {
+    margin-bottom: 48px;
+  }
+  .conditions__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+    gap: 12px;
+  }
+  .conditions__item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px 18px;
+    background: var(--color-white);
+    border: 1px solid rgba(184, 135, 83, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .conditions__item:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+  .conditions__item svg {
+    width: 19px;
+    height: 19px;
+    flex: none;
+    color: var(--color-gold);
+    padding: 3px;
+    border: 1px solid rgba(184, 135, 83, 0.4);
+    border-radius: 50%;
+  }
+</style>

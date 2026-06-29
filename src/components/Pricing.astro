@@ -1,0 +1,107 @@
+---
+import { content } from "../data/content.ts";
+const { pricing, doctor } = content;
+---
+
+<section id="valores" class="section section-soft pricing">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="kicker kicker--center">{pricing.kicker}</span>
+      <h2>{pricing.title}</h2>
+      <p class="lead">{pricing.intro}</p>
+    </div>
+
+    <div class="pricing__grid">
+      {pricing.groups.map((g, i) => (
+        <div class="pricing__card" data-reveal data-reveal-delay={(i % 3) + 1}>
+          <h3 class="pricing__card-title">{g.title}</h3>
+          <ul class="pricing__list">
+            {g.items.map((it) => (
+              <li>
+                <span class="pricing__name">{it.name}</span>
+                <span class="pricing__price">{it.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <p class="pricing__note" data-reveal>{pricing.note}</p>
+
+    <div class="pricing__cta" data-reveal>
+      <a class="btn btn-primary" href={doctor.whatsappUrl} target="_blank" rel="noopener">
+        {pricing.ctaLabel}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing .section-head {
+    margin-bottom: 48px;
+  }
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 22px;
+    align-items: start;
+  }
+  .pricing__card {
+    background: var(--color-white);
+    border: 1px solid rgba(184, 135, 83, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 28px 26px;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .pricing__card:hover {
+    border-color: rgba(184, 135, 83, 0.6);
+    transform: translateY(-3px);
+  }
+  .pricing__card-title {
+    font-family: var(--font-title);
+    font-size: 1.28rem;
+    color: var(--color-primary);
+    margin: 0 0 16px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid rgba(81, 9, 10, 0.1);
+  }
+  .pricing__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 13px;
+  }
+  .pricing__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .pricing__name {
+    font-size: 0.94rem;
+    line-height: 1.35;
+    color: var(--color-text);
+  }
+  .pricing__price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-gold-text);
+    white-space: nowrap;
+    flex: none;
+  }
+  .pricing__note {
+    margin: 32px auto 0;
+    max-width: 62ch;
+    text-align: center;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .pricing__cta {
+    margin-top: 30px;
+    text-align: center;
+  }
+</style>
