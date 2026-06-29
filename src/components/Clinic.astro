@@ -1,6 +1,9 @@
 ---
 import { content } from "../data/content.ts";
 import PhotoFrame from "./PhotoFrame.astro";
+import imgConsultorio from "../assets/clinica-consultorio.jpg";
+import imgProcedimento from "../assets/clinica-procedimento.jpg";
+import imgEstrutura from "../assets/clinica-estrutura.jpg";
 const { clinic } = content;
 ---
 
@@ -20,14 +23,15 @@ const { clinic } = content;
       </ul>
     </div>
 
-    <div class="clinic__gallery">
-      <div class="clinic__col clinic__col--up" data-reveal="right">
-        <PhotoFrame ratio="3 / 4" tone="nude" caption="Recepção" />
-        <PhotoFrame ratio="1 / 1" tone="wine" caption="Sala de procedimentos" />
+    <div class="clinic__gallery" data-reveal="right">
+      <div class="clinic__tile clinic__tile--a">
+        <PhotoFrame class="is-fill" image={imgConsultorio} alt="Consultório da Clínica Soul Essence, na Asa Sul" position="center" />
       </div>
-      <div class="clinic__col clinic__col--down" data-reveal="right" data-reveal-delay="2">
-        <PhotoFrame ratio="1 / 1" tone="soft" caption="Consultório" />
-        <PhotoFrame ratio="3 / 4" tone="nude" caption="Ambiente" />
+      <div class="clinic__tile clinic__tile--b">
+        <PhotoFrame ratio="3 / 4" image={imgProcedimento} alt="Atendimento e procedimentos — laser íntimo de CO2" position="50% 35%" />
+      </div>
+      <div class="clinic__tile clinic__tile--c">
+        <PhotoFrame ratio="3 / 2" image={imgEstrutura} alt="Estrutura da clínica com vista para Brasília" position="center" />
       </div>
     </div>
   </div>
@@ -76,19 +80,24 @@ const { clinic } = content;
 
   .clinic__gallery {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    grid-template-columns: 1.12fr 1fr;
+    grid-template-areas:
+      "a b"
+      "a c";
+    gap: 18px;
   }
-  .clinic__col {
+  .clinic__tile {
+    min-height: 0;
+  }
+  .clinic__tile--a {
+    grid-area: a;
     display: flex;
-    flex-direction: column;
-    gap: 22px;
   }
-  .clinic__col--up {
-    margin-top: -28px;
+  .clinic__tile--b {
+    grid-area: b;
   }
-  .clinic__col--down {
-    margin-top: 28px;
+  .clinic__tile--c {
+    grid-area: c;
   }
 
   @media (max-width: 920px) {
@@ -96,14 +105,21 @@ const { clinic } = content;
       grid-template-columns: 1fr;
       gap: 48px;
     }
-    .clinic__col--up,
-    .clinic__col--down {
-      margin-top: 0;
-    }
   }
-  @media (max-width: 420px) {
+  @media (max-width: 560px) {
     .clinic__gallery {
       grid-template-columns: 1fr;
+      grid-template-areas:
+        "a"
+        "b"
+        "c";
+    }
+    .clinic__tile--a {
+      display: block;
+    }
+    .clinic__tile--a :global(.photo.is-fill) {
+      aspect-ratio: 3 / 4;
+      height: auto;
     }
   }
 </style>

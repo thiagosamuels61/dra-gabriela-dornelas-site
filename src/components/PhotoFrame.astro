@@ -86,6 +86,11 @@ const {
   .photo--filled {
     background: var(--color-cream);
   }
+  /* preenche toda a altura da célula de grid (mosaico) em vez de impor proporção */
+  .photo.is-fill {
+    aspect-ratio: auto;
+    height: 100%;
+  }
   .photo__mono {
     font-family: var(--font-title);
     font-size: clamp(7rem, 16vw, 13rem);

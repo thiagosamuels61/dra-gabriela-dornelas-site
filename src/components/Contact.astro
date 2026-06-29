@@ -3,6 +3,8 @@ import { content } from "../data/content.ts";
 const { contact, doctor } = content;
 
 const infoIcons: Record<string, string> = {
+  Clínica:
+    '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-5h6v5"/><path d="M12 7v3M10.5 8.5h3"/>',
   Cidade: '<path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
   Instagram:
     '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/>',
@@ -37,17 +39,17 @@ const infoIcons: Record<string, string> = {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/></svg>
           <span>{doctor.instagram}</span>
         </a>
-        <a href={doctor.bioSiteUrl} target="_blank" rel="noopener" aria-label="Bio site">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 6 .5l2-2a4 4 0 0 0-5.7-5.7l-1.1 1.1"/><path d="M14 10a4 4 0 0 0-6-.5l-2 2a4 4 0 0 0 5.7 5.7l1.1-1.1"/></svg>
-          <span>{doctor.bioSite}</span>
+        <a href={doctor.reviewUrl} target="_blank" rel="noopener" aria-label="Avaliar atendimento no Doctoralia">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.2 4.1 1 5.9-5.3-2.8-5.3 2.8 1-5.9-4.2-4.1 5.9-.9Z"/></svg>
+          <span>Avaliar atendimento</span>
         </a>
       </div>
 
-      <div class="contact__map" data-replace="mapa" aria-label="Localização em Brasília/DF">
+      <div class="contact__map" data-replace="mapa" aria-label="Localização na Asa Sul, Brasília/DF">
         <span class="contact__map-pin">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
         </span>
-        <span>Atendimento em <strong>{doctor.city}</strong></span>
+        <span><strong>{doctor.clinicName}</strong> · {doctor.clinicArea}</span>
       </div>
     </div>
 
@@ -245,7 +247,7 @@ const infoIcons: Record<string, string> = {
   }
 </style>
 
-<script is:inline define:vars={{ whatsappUrl: doctor.whatsappUrl }}>
+<script is:inline define:vars={{ whatsappPhone: doctor.whatsappPhone }}>
   const form = document.querySelector("[data-contact-form]");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -261,7 +263,7 @@ const infoIcons: Record<string, string> = {
         (message ? `Mensagem: ${message}.\n` : "") +
         (phone ? `Meu WhatsApp: ${phone}.` : "");
       window.open(
-        `${whatsappUrl}?text=${encodeURIComponent(raw)}`,
+        `https://api.whatsapp.com/send/?phone=${whatsappPhone}&text=${encodeURIComponent(raw)}&type=phone_number&app_absent=0`,
         "_blank",
         "noopener"
       );

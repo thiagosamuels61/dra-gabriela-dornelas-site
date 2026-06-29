@@ -5,15 +5,21 @@
 export interface SiteContent {
   doctor: {
     name: string;
+    fullName: string;
     role: string;
     crm: string;
     rqe: string;
     city: string;
+    clinicName: string;
+    clinicArea: string;
+    tagline: string;
     instagram: string;
     instagramUrl: string;
     bioSite: string;
     bioSiteUrl: string;
     whatsappUrl: string;
+    whatsappPhone: string;
+    reviewUrl: string;
   };
   nav: { label: string; href: string }[];
   hero: {
@@ -67,15 +73,23 @@ export interface SiteContent {
 export const content: SiteContent = {
   doctor: {
     name: 'Dra. Gabriela Dornelas',
+    fullName: 'Dra. Gabriela Alves de Moura Dornelas',
     role: 'Ginecologista e Obstetra',
     crm: 'CRM/DF 27509',
     rqe: 'RQE 24605',
     city: 'Brasília/DF',
+    clinicName: 'Clínica Soul Essence',
+    clinicArea: 'Asa Sul · Brasília/DF',
+    tagline: 'Sua médica, para todas as fases da sua vida.',
     instagram: '@dragabrieladornelass',
-    instagramUrl: 'https://instagram.com/dragabrieladornelass',
+    instagramUrl: 'https://www.instagram.com/dragabrieladornelass/',
     bioSite: 'bio.site/dragabrieladornelass',
     bioSiteUrl: 'https://bio.site/dragabrieladornelass',
-    whatsappUrl: 'https://wa.me/55', // TODO: substituir pelo numero real de WhatsApp da clinica
+    whatsappUrl:
+      'https://api.whatsapp.com/send/?phone=5561996925550&text&type=phone_number&app_absent=0',
+    whatsappPhone: '5561996925550',
+    reviewUrl:
+      'https://www.doctoralia.com.br/adicionar-opiniao/gabriela-alves-de-moura-dornelas?doctor_id=1017193#/opiniao',
   },
 
   nav: [
@@ -278,6 +292,11 @@ export const content: SiteContent = {
               'Investigação de fatores hormonais e metabólicos que influenciam o peso, o apetite e a disposição.',
           },
           {
+            name: 'Lipedema',
+            text:
+              'Atenção ao lipedema — acúmulo doloroso de gordura que afeta principalmente pernas e braços —, com avaliação cuidadosa e orientação de manejo voltada ao alívio dos sintomas e à qualidade de vida.',
+          },
+          {
             name: 'Impacto do emagrecimento na saúde íntima',
             text:
               'Atenção às mudanças que a perda de peso, especialmente quando rápida, pode causar na firmeza e no conforto da região íntima.',
@@ -297,6 +316,11 @@ export const content: SiteContent = {
             name: 'Medicina regenerativa íntima',
             text:
               'Recursos regenerativos para qualidade dos tecidos íntimos, indicados conforme a necessidade clínica e os objetivos de cada paciente.',
+          },
+          {
+            name: 'Clareamento íntimo',
+            text:
+              'Procedimento estético para uniformizar o tom da região íntima, indicado após avaliação individualizada e realizado com técnica segura e discreta.',
           },
           {
             name: 'Saúde e hidratação íntima',
@@ -346,8 +370,8 @@ export const content: SiteContent = {
     kicker: 'Sobre a Dra. Gabriela',
     title: 'Ciência, sensibilidade e respeito pela mulher',
     paragraphs: [
-      'A Dra. Gabriela Dornelas é médica ginecologista e obstetra, dedicada à saúde íntima, ao equilíbrio hormonal e à autoestima da mulher. Seu trabalho une o rigor da medicina baseada em evidências a uma escuta acolhedora, em que cada paciente é vista por inteiro.',
-      'Atuando em Brasília/DF, reúne ginecologia moderna, reposição hormonal, emagrecimento e cirurgia íntima em um cuidado integrado, pensado para acompanhar a mulher nas diferentes fases da vida — da idade reprodutiva à menopausa.',
+      'A Dra. Gabriela Alves de Moura Dornelas é médica ginecologista e obstetra, dedicada à saúde íntima, ao equilíbrio hormonal e à autoestima da mulher. Seu trabalho une o rigor da medicina baseada em evidências a uma escuta acolhedora, em que cada paciente é vista por inteiro.',
+      'Na Clínica Soul Essence, na Asa Sul (Brasília/DF), reúne ginecologia moderna, reposição hormonal, emagrecimento e cirurgia íntima em um cuidado integrado, pensado para acompanhar a mulher nas diferentes fases da vida — da idade reprodutiva à menopausa. Mais do que uma especialista, ela se propõe a ser a sua médica para todas as fases da sua vida.',
       'No Instagram, compartilha informação de qualidade com milhares de mulheres, levando temas antes cercados de tabu para uma conversa franca, clara e segura. Mais do que tratar sintomas, sua missão é devolver conforto, confiança e bem-estar.',
     ],
     credentials: [
@@ -403,14 +427,14 @@ export const content: SiteContent = {
 
   clinic: {
     kicker: 'Onde você é atendida',
-    title: 'Um ambiente discreto e acolhedor em Brasília',
+    title: 'Clínica Soul Essence, na Asa Sul',
     text:
-      'O atendimento acontece em um espaço pensado para o seu conforto e a sua privacidade, onde tecnologia e acolhimento caminham juntos. Aqui, cada detalhe existe para que você se sinta segura para cuidar da sua saúde íntima e hormonal.',
+      'O atendimento acontece na Clínica Soul Essence, na Asa Sul (Brasília/DF), em um espaço pensado para o seu conforto e a sua privacidade, onde tecnologia e acolhimento caminham juntos. Aqui, cada detalhe existe para que você se sinta segura para cuidar da sua saúde íntima e hormonal.',
     points: [
       'Atendimento individualizado, com tempo e escuta para cada paciente',
       'Ambiente reservado, que preserva a sua privacidade e o seu conforto',
-      'Estrutura preparada para procedimentos ginecológicos e íntimos',
-      'Localização em Brasília/DF, com agendamento facilitado',
+      'Estrutura preparada para procedimentos ginecológicos e laser íntimo de CO2',
+      'Localização na Asa Sul, Brasília/DF, com agendamento facilitado',
     ],
   },
 
@@ -457,6 +481,7 @@ export const content: SiteContent = {
     text:
       'Dê o primeiro passo para cuidar da sua saúde íntima, hormonal e da sua autoestima. O agendamento é simples e o atendimento, discreto e acolhedor.',
     infos: [
+      { label: 'Clínica', value: 'Clínica Soul Essence — Asa Sul' },
       { label: 'Cidade', value: 'Brasília/DF' },
       { label: 'Instagram', value: '@dragabrieladornelass' },
       { label: 'Agendamento', value: 'Atendimento por agendamento prévio' },

@@ -17,6 +17,9 @@ const navCols = [nav.slice(0, 4), nav.slice(4)];
         <a href={doctor.whatsappUrl} target="_blank" rel="noopener" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18.5 4 22l3.6-1.4A8.5 8.5 0 1 0 4.2 16Z"/><path d="M9 9.5c.3 2 1.8 3.7 3.6 4.4l1-1.2 1.8.6.3 1.9c-2.7.8-6.4-1.4-7.4-4.6Z"/></svg>
         </a>
+        <a href={doctor.reviewUrl} target="_blank" rel="noopener" aria-label="Avaliar atendimento no Doctoralia">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.2 4.1 1 5.9-5.3-2.8-5.3 2.8 1-5.9-4.2-4.1 5.9-.9Z"/></svg>
+        </a>
       </div>
     </div>
 
@@ -32,9 +35,9 @@ const navCols = [nav.slice(0, 4), nav.slice(4)];
 
     <div class="footer__contact">
       <span class="footer__col-title">Atendimento</span>
-      <p>{doctor.city}</p>
+      <p>{doctor.clinicName}</p>
+      <p>{doctor.clinicArea}</p>
       <p>{doctor.instagram}</p>
-      <p>{doctor.bioSite}</p>
       <a class="btn btn-gold footer__cta" href={doctor.whatsappUrl} target="_blank" rel="noopener">
         Agendar consulta
       </a>
